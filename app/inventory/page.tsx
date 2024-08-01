@@ -25,12 +25,10 @@ export default function Page() {
         <div className="mt-4 mb-8 text-center">
           This is an image of a <span className="font-bold">Shoe</span>
         </div>
-        <div className="text-center text-[1.25rem] mb-3">
-          <button className="inline-flex items-center bg-primary-200 px-3 py-1">
-            <span className="mr-4 text-black">Select Image</span>
-            <div>
-              {" "}
-              <Image src={folder} alt="image of a folder" width={30} />
+        <div className="text-center text-[1.2rem]  mb-3">
+          <button className=" text-black items-center bg-primary-200 py-1 w-1/2 px-1">
+            <div className="overflow-hidden">
+              <input type="file" />
             </div>
           </button>
         </div>

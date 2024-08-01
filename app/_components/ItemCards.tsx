@@ -1,18 +1,17 @@
-import React from "react";
+"use client";
+
 import Button from "./Button";
+import { handleAdd, handleRemove } from "@/app/_lib/actions";
 
 export interface Item {
+  id: string;
   name: string;
   quantity: number;
   image?: string;
   userId?: string;
 }
 
-export default function ItemCards({ name, quantity }: Item) {
-  function handleAdd() {
-    console.log("newton");
-  }
-
+export default function ItemCards({ id, name, quantity }: Item) {
   return (
     <div className="grid grid-cols-3 gap-4 items-center">
       <div className="text-[1.25rem] capitalize">
@@ -26,9 +25,14 @@ export default function ItemCards({ name, quantity }: Item) {
           text="Add"
           bgColor="bg-accent-600"
           type="primary"
-          // onClick={handleAdd}
+          onClickItem={() => handleAdd(id, quantity)}
         />
-        <Button text="Remove" bgColor="bg-primary-900" type="secondary" />
+        <Button
+          onClickItem={() => handleRemove(id, quantity)}
+          text="Remove"
+          bgColor="bg-primary-900"
+          type="secondary"
+        />
       </div>
     </div>
   );

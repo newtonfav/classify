@@ -1,8 +1,10 @@
-import { getItems } from "../_lib/data-service";
+import { getItems, updateItem } from "../_lib/data-service";
 import ItemCards, { Item } from "@/app/_components/ItemCards";
 
 export default async function InventoryItems() {
   const items: Item[] = await getItems();
+
+  // console.log(items);
 
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 
@@ -20,6 +22,7 @@ export default async function InventoryItems() {
               name={item.name}
               quantity={item.quantity}
               key={item.name}
+              id={item.id}
             />
           ))}
         </div>
