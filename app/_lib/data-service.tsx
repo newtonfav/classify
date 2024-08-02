@@ -29,3 +29,19 @@ export async function updateItem(
   }
   return data;
 }
+
+export async function uploadImagetoStorage(file: File, path: string) {
+  // Create Supabase client
+  const { data, error } = await supabase.storage
+    .from("images")
+    .upload(path, file, {
+      upsert: true,
+    });
+
+  if (error) {
+    console.error(error);
+    throw new Error("Image could not be uploaded");
+  }
+
+  return data;
+}
