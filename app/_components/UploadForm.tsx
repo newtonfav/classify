@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import { useFormState } from "react-dom";
-
+import SpinnerMini from "@/app/_components/SpinnerMini";
 import { useFormStatus } from "react-dom";
 import { uploadImage } from "../_lib/actions";
 
@@ -27,9 +27,10 @@ function SubmitButton() {
     <button
       type="submit"
       aria-disabled={pending}
-      className="bg-accent-600 px-4 py-1"
+      disabled={pending}
+      className="bg-accent-600 px-6 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      Add
+      {pending ? <SpinnerMini /> : "Add"}
     </button>
   );
 }
@@ -37,24 +38,39 @@ function SubmitButton() {
 interface UploadFormProps {
   setImagePath: (url: string) => void;
   setaiResponse: (response: string) => void;
+  setisLoading: (response: boolean) => void;
 }
 
 export default function UploadForm({
   setImagePath,
   setaiResponse,
+  setisLoading,
 }: UploadFormProps) {
   const [state, formAction] = useFormState(uploadImage, initialState);
+  const [loading, startTransition] = useTransition();
+
+  function handleFormAction(payload: FormData) {
+    startTransition(() => formAction(payload));
+  }
 
   useEffect(
     function () {
       setImagePath(state.imagePath as string);
       setaiResponse(state.responseText as string);
+      setisLoading(loading);
     },
-    [setImagePath, setaiResponse, state.imagePath, state.responseText]
+    [
+      loading,
+      setImagePath,
+      setaiResponse,
+      setisLoading,
+      state.imagePath,
+      state.responseText,
+    ]
   );
 
   return (
-    <form className="flex flex-col items-center" action={formAction}>
+    <form className="flex flex-col items-center" action={handleFormAction}>
       <div className=" text-black items-center bg-primary-200 py-1 w-7/12 px-1">
         <input
           type="file"
