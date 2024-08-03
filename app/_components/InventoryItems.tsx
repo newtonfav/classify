@@ -21,7 +21,7 @@ export default async function InventoryItems() {
             <ItemCards
               name={item.name}
               quantity={item.quantity}
-              key={item.name}
+              key={item.id}
               id={item.id}
             />
           ))}

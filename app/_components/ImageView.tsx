@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import UploadForm from "@/app/_components/UploadForm";
 import Spinner from "./Spinner";
+import extractNameFromPrompt from "../utils/extractNameFromPrompt";
 
 export default function ImageView() {
   const [imagePath, setImagePath] = useState("");
@@ -12,7 +13,9 @@ export default function ImageView() {
 
   const imageUrl = `https://yphdqckpsujxoxakgalj.supabase.co/storage/v1/object/public/${imagePath}`;
 
-  // console.log(isLoading);
+  const { name, mainText } = extractNameFromPrompt(aiResponse);
+
+  // console.log(aiPrompt);
 
   return (
     <div>
@@ -33,27 +36,18 @@ export default function ImageView() {
             Identify an image using AI🤖, start by uploading an image
           </div>
         )}
-        {/* {!imagePath ? (
-          <div className="text-[1.3rem] text-wrap text-center text-white">
-            Identify an image using AI🤖, start by uploading an image
-          </div>
-        ) : (
-          <Image
-            src={imageUrl}
-            alt="Image of a shoe"
-            placeholder="blur"
-            quality={80}
-            width={200}
-            height={100}
-            className=""
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8vMOnHgAG1QJoDxd3CAAAAABJRU5ErkJggg=="
-          />
-        )} */}
       </div>
       <div className="flex flex-col justify-center">
         <div className="mb-4">
           {aiResponse && (
-            <div className="mt-2 text-[1rem] text-center">{aiResponse}</div>
+            <>
+              <div className="mt-2 text-[1rem] text-center">{mainText}</div>
+              <div className="mt-2 text-[1rem] text-center font-bold ">
+                This item will be called{" "}
+                <span className="text-primary-300">{name}</span> in your
+                inventory.
+              </div>
+            </>
           )}
         </div>
 
@@ -67,16 +61,4 @@ export default function ImageView() {
       </div>
     </div>
   );
-}
-{
-  /* <Image
-  src={imageUrl}
-  alt="Image of a shoe"
-  placeholder="blur"
-  quality={80}
-  width={200}
-  height={100}
-  className=""
-  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN8vMOnHgAG1QJoDxd3CAAAAABJRU5ErkJggg=="
-/>; */
 }

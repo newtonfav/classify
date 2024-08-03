@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { useFormState } from "react-dom";
 import SpinnerMini from "@/app/_components/SpinnerMini";
 import { useFormStatus } from "react-dom";
 import { uploadImage } from "../_lib/actions";
+import { AddtoInventoryButton } from "./AddtoInventoryButton";
 
 export interface FormState {
   success: boolean;
@@ -30,7 +31,7 @@ function SubmitButton() {
       disabled={pending}
       className="bg-accent-600 px-6 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? <SpinnerMini /> : "Add"}
+      {pending ? <SpinnerMini /> : "Detect"}
     </button>
   );
 }
@@ -48,6 +49,7 @@ export default function UploadForm({
 }: UploadFormProps) {
   const [state, formAction] = useFormState(uploadImage, initialState);
   const [loading, startTransition] = useTransition();
+  const [isInventoryUpdated, setIsInventoryUpdated] = useState(false);
 
   function handleFormAction(payload: FormData) {
     startTransition(() => formAction(payload));
@@ -58,6 +60,9 @@ export default function UploadForm({
       setImagePath(state.imagePath as string);
       setaiResponse(state.responseText as string);
       setisLoading(loading);
+      if (state.responseText) {
+        setIsInventoryUpdated(false);
+      }
     },
     [
       loading,
@@ -69,24 +74,49 @@ export default function UploadForm({
     ]
   );
 
+  const handleInventoryUpdate = () => {
+    state.responseText = "";
+    state.message = "";
+    state.imagePath = "";
+    setIsInventoryUpdated(true);
+  };
+
   return (
     <form className="flex flex-col items-center" action={handleFormAction}>
       <div className=" text-black items-center bg-primary-200 py-1 w-7/12 px-1">
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          className="w-11/12"
-          id="file"
-          name="file"
-          required
-        />
+        {state.responseText ? (
+          <div className="tracking-tight leading-none p-3">
+            Do you want to add this item to your Inventory?
+          </div>
+        ) : (
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            className="w-11/12"
+            id="file"
+            name="file"
+            required
+          />
+        )}
       </div>
-      <span className={`text-[1rem] ${state.success ? "" : "text-accent-100"}`}>
+      <span
+        className={`text-[0.9rem] ${
+          state.success ? "text-primary-300" : "text-accent-100"
+        }`}
+      >
         {state?.message}
       </span>
 
       <div className="self-center mt-3">
-        <SubmitButton />
+        {state.responseText ? (
+          <AddtoInventoryButton
+            responseText={state.responseText}
+            imagePath={state.imagePath}
+            onUpdate={handleInventoryUpdate}
+          />
+        ) : (
+          <SubmitButton />
+        )}
       </div>
     </form>
   );

@@ -1,10 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { updateItem, uploadImagetoStorage } from "./data-service";
+import {
+  createItem,
+  getItemsByName,
+  updateItem,
+  uploadImagetoStorage,
+} from "./data-service";
 import { join } from "path";
 //Google
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { NewItem } from "../_components/AddtoInventoryButton";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -45,7 +51,7 @@ export async function uploadImage(
   }
 
   if (file?.size > 5000000) {
-    return { success: false, message: "File must be less than 5mb" };
+    return { success: false, message: "Image must be less than 5mb" };
   }
   const bytes = await file.arrayBuffer();
 
@@ -56,16 +62,12 @@ export async function uploadImage(
     },
   };
 
-  const prompt = "what is this image?";
+  const prompt =
+    "Describe the contents of the image and provide a short name for it. the name provided should be at the end of the description and should be in a bracket.";
 
   //Upload to storage
   const path = join("/", "temp", file.name);
   const res = await uploadImagetoStorage(file, path);
-
-  // console.log(res);
-  //https://yphdqckpsujxoxakgalj.supabase.co/storage/v1/object/public/images/temp/dev.png
-  // const buffer = Buffer.from(bytes);
-  // await writeFile(path, buffer);
 
   const result = await model.generateContent([prompt, image]);
   const imageUrl = res.fullPath;
@@ -74,6 +76,28 @@ export async function uploadImage(
     success: true,
     responseText: result.response.text(),
     imagePath: imageUrl,
-    message: "image uploaded successfully",
+    message: "Image classified successfully",
   };
+}
+
+export async function handleCreateItem(newItem: NewItem) {
+  try {
+    const { name, ...rest } = newItem;
+
+    const data = await getItemsByName(name);
+
+    if (!data) {
+      throw new Error("Failed to check for existing item");
+    }
+
+    if (data.length >= 1) {
+      await handleAdd(data[0].id, data[0].quantity);
+      return;
+    }
+
+    const res = await createItem(newItem);
+    revalidatePath("/inventory");
+  } catch (error) {
+    console.error("Error adding item:", error);
+  }
 }
