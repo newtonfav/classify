@@ -4,8 +4,6 @@ import ItemCards, { Item } from "@/app/_components/ItemCards";
 export default async function InventoryItems() {
   const items: Item[] = await getItems();
 
-  // console.log(items);
-
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 
   return (
