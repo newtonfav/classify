@@ -22,7 +22,8 @@ export default function Home() {
               </h1>
               <Image
                 src={avatar}
-                alt="magnifying glass"
+                alt="illustration of a person using a computer"
+                quality={100}
                 width={150}
                 height={150}
                 className="invert transform scale-x-[-1] phone:mb-5"
