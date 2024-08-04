@@ -5,7 +5,7 @@ import SpinnerMini from "./SpinnerMini";
 
 export interface NewItem {
   name: string;
-  userId: number;
+  userId?: "";
   quantity: number;
   image: string;
   description: string;
@@ -28,7 +28,6 @@ export function AddtoInventoryButton({
   function handleAddItem() {
     const newItem = {
       name,
-      userId: 1,
       quantity: 1,
       image: imageUrl,
       description: mainText,

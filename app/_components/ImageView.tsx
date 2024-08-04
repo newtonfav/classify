@@ -15,8 +15,6 @@ export default function ImageView() {
 
   const { name, mainText } = extractNameFromPrompt(aiResponse);
 
-  // console.log(aiPrompt);
-
   return (
     <div>
       <div className="h-[16rem] rounded-[2rem] bg-primary-800 backdrop-blur-[20px] opacity-90 flex items-center justify-center overflow-hidden p-6 relative">

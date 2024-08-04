@@ -1,9 +1,13 @@
+import { auth } from "./auth";
 import { supabase } from "./supabase";
 
 export const getItems = async function () {
+  const session: any = await auth();
+
   const { data, error } = await supabase
     .from("items")
     .select("id, name, quantity, image, userId")
+    .eq("userId", session?.user?.userId)
     .order("name");
 
   if (error) {
@@ -71,6 +75,37 @@ export async function createItem(newItem: {}) {
   if (error) {
     console.error(error);
     throw new Error("Item could not be created");
+  }
+
+  return data;
+}
+
+export async function deleteItem(id: string) {
+  const { error } = await supabase.from("items").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Item could not be deleted");
+  }
+}
+
+export async function getUser(email: string) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", email)
+    .single();
+
+  // No error here! We handle the possibility of no guest in the sign in callback
+  return data;
+}
+
+export async function createUser(newUser: {}) {
+  const { data, error } = await supabase.from("users").insert([newUser]);
+
+  if (error) {
+    console.error(error);
+    throw new Error("User could not be created");
   }
 
   return data;

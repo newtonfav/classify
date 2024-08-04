@@ -1,19 +1,17 @@
-import Image from "next/image";
-import testImage from "@/public/test.jpg";
-import UploadForm from "@/app/_components/UploadForm";
-import { useState } from "react";
 import ImageView from "@/app/_components/ImageView";
+import { auth } from "../_lib/auth";
+import LoginMessage from "../_components/LoginMessage";
 
 export const metadata = {
   title: "Inventory",
 };
 
-export default function Page() {
+export default async function Page() {
+  const session = await auth();
+
   return (
     <div className="font-semibold text-2xl mb-7 flex flex-col mx-[5rem]">
-      <div>
-        <ImageView />
-      </div>
+      <div>{session?.user ? <ImageView /> : <LoginMessage />}</div>
     </div>
   );
 }

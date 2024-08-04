@@ -31,7 +31,7 @@ function SubmitButton() {
       disabled={pending}
       className="bg-accent-600 px-6 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? <SpinnerMini /> : "Detect"}
+      {pending ? <SpinnerMini /> : "Classify"}
     </button>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useOptimistic, useTransition } from "react";
+import { useOptimistic, useTransition } from "react";
 import Button from "./Button";
 import { handleAdd, handleRemove } from "@/app/_lib/actions";
 
@@ -56,6 +56,7 @@ export default function ItemCards({ id, name, quantity }: Item) {
           onClickItem={handleAddQuantity}
         />
         <Button
+          isLoading={optimisticQuantity === 0 ? isloading : undefined}
           onClickItem={handleAddQuantity}
           text="Remove"
           id={"removeButton"}

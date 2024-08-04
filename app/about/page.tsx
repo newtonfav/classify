@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="text-lg items-center">
       <div className="mb-10">
-        <h1 className="text-4xl mb-10 text-accent-400 font-medium">
+        <h1 className="text-4xl mb-3 text-accent-400 font-medium">
           Welcome to Classify🎉
         </h1>
 
@@ -34,7 +34,7 @@ export default function Page() {
           integrate these images into your inventory system.
         </div>
 
-        <p className="space-y-8">
+        <div className="space-y-8">
           <div>
             <Link
               href="/inventory"
@@ -43,7 +43,7 @@ export default function Page() {
               Try it Out!
             </Link>
           </div>
-        </p>
+        </div>
       </div>
     </div>
   );

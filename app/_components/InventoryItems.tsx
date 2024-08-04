@@ -1,8 +1,10 @@
+import { useOptimistic } from "react";
 import { getItems, updateItem } from "../_lib/data-service";
 import ItemCards, { Item } from "@/app/_components/ItemCards";
 
 export default async function InventoryItems() {
   const items: Item[] = await getItems();
+  // const [optimisticItems, setOptimisticItems] = useOptimistic(items, () => {});
 
   const totalItems = items.reduce((acc, cur) => acc + cur.quantity, 0);
 

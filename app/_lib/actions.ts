@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import {
   createItem,
+  deleteItem,
   getItemsByName,
   updateItem,
   uploadImagetoStorage,
@@ -11,6 +12,7 @@ import { join } from "path";
 //Google
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NewItem } from "../_components/AddtoInventoryButton";
+import { auth, signIn, signOut } from "./auth";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY as string);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -24,8 +26,23 @@ export async function handleAdd(id: string, quantity: number) {
   }
 }
 
+export async function handleDelete(id: string) {
+  try {
+    await deleteItem(id);
+    revalidatePath("/inventory");
+  } catch (error) {
+    console.error("Error deleting item:", error);
+  }
+}
+
 export async function handleRemove(id: string, quantity: number) {
   try {
+    if (quantity <= 1) {
+      await deleteItem(id);
+      revalidatePath("/inventory");
+      return;
+    }
+
     await updateItem(id, { quantity: quantity - 1 });
     revalidatePath("/inventory");
   } catch (error) {
@@ -82,7 +99,9 @@ export async function uploadImage(
 
 export async function handleCreateItem(newItem: NewItem) {
   try {
+    const session: any = await auth();
     const { name, ...rest } = newItem;
+    newItem.userId = session?.user.userId;
 
     const data = await getItemsByName(name);
 
@@ -100,4 +119,12 @@ export async function handleCreateItem(newItem: NewItem) {
   } catch (error) {
     console.error("Error adding item:", error);
   }
+}
+
+export async function signInAction() {
+  await signIn("google", { redirectTo: "/inventory" });
+}
+
+export async function signOutAction() {
+  await signOut({ redirectTo: "/" });
 }
