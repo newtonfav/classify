@@ -3,6 +3,7 @@ import avatar from "@/public/avatar.png";
 import illustration from "@/public/illustration.svg";
 import SignInButton from "./_components/SigninButton";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["greek"], display: "swap" });
 export default function Home() {
@@ -46,16 +47,23 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-4 phone:text-[0.8rem]">
+      <div className="mt-4 phone:text-[0.6rem] ">
         Built with ❤️ by{" "}
         <a
           href="https://newtonfav.xyz"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline text-accent-500"
+          className="underline text-accent-500 mr-2 phone:text-[0.6rem]"
         >
           Favour Oghenekowho
         </a>
+        <span>|</span>
+        <Link
+          href="/privacy"
+          className="underline text-[0.8rem] phone:text-[0.6rem] ml-2"
+        >
+          Privacy Policy
+        </Link>
       </div>
     </div>
   );

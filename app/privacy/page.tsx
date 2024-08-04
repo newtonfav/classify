@@ -2,8 +2,8 @@ import React from "react";
 
 export default function page() {
   return (
-    <div>
-      <strong>Privacy Policy</strong>
+    <div className="midPhone:text-[0.8rem]">
+      <strong className="text-accent-500 text-[2rem]">Privacy Policy</strong>
       <p>
         This privacy policy applies to the Classify app (hereby referred to as
         "Application") for web services that was created by Favour Oghenekowho
@@ -195,7 +195,8 @@ export default function page() {
       <p>
         If you have any questions regarding privacy while using the Application,
         or have questions about the practices, please contact the Service
-        Provider via email at gh.oghene@gmail.com.
+        Provider via email at <br />
+        <strong className="text-accent-300">newtonfav@gmail.com.</strong>
       </p>
       <hr />
     </div>
