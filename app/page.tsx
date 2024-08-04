@@ -1,9 +1,8 @@
 import Image from "next/image";
-import avatar from "@/public/avatar.svg";
+import avatar from "@/public/avatar.png";
 import illustration from "@/public/illustration.svg";
 import SignInButton from "./_components/SigninButton";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 
 const inter = Inter({ subsets: ["greek"], display: "swap" });
 export default function Home() {
