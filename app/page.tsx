@@ -1,3 +1,5 @@
+/* eslint react/no-unescaped-entities: "off" */
+
 import Image from "next/image";
 import avatar from "@/public/avatar.png";
 import illustration from "@/public/illustration.svg";
