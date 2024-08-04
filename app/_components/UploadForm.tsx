@@ -29,7 +29,7 @@ function SubmitButton() {
       type="submit"
       aria-disabled={pending}
       disabled={pending}
-      className="bg-accent-600 px-6 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="bg-accent-600 px-6 py-2 midPhone:py-1 midPhone:text-[1rem] midPhone:px-3 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {pending ? <SpinnerMini /> : "Classify"}
     </button>
@@ -83,7 +83,7 @@ export default function UploadForm({
 
   return (
     <form className="flex flex-col items-center" action={handleFormAction}>
-      <div className=" text-black items-center bg-primary-200 py-1 w-7/12 px-1">
+      <div className=" text-black items-center bg-primary-200 py-1 w-7/12 px-1 midPhone:w-10/12">
         {state.responseText ? (
           <div className="tracking-tight leading-none p-3">
             Do you want to add this item to your Inventory?
@@ -92,7 +92,7 @@ export default function UploadForm({
           <input
             type="file"
             accept="image/png, image/jpeg"
-            className="w-11/12"
+            className="w-11/12 midPhone:w-full"
             id="file"
             name="file"
             required

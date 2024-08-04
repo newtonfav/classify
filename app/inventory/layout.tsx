@@ -7,7 +7,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="grid grid-cols-[35rem_1fr] h-full gap-12">
+    <div className="grid grid-cols-[35rem_1fr] h-full gap-12 tabletCustom:flex tabletCustom:flex-col-reverse">
       <InventoryItems />
       <div className="">{children}</div>
     </div>

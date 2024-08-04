@@ -41,10 +41,10 @@ export default function ItemCards({ id, name, quantity }: Item) {
 
   return (
     <div className="grid grid-cols-3 gap-4 items-center">
-      <div className="text-[1.25rem] capitalize">
+      <div className="text-[1.25rem] capitalize midPhone:text-[0.9rem]">
         <span className="block truncate">{name}</span>
       </div>
-      <div className="text-[1.25rem]">
+      <div className="text-[1.25rem] midPhone:text-[1rem]">
         <span>{optimisticQuantity}</span>
       </div>
       <div className="flex justify-end gap-2">

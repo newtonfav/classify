@@ -10,7 +10,7 @@ export default async function Page() {
   const session = await auth();
 
   return (
-    <div className="font-semibold text-2xl mb-7 flex flex-col mx-[5rem]">
+    <div className="font-semibold text-2xl mb-7 flex flex-col mx-[5rem] midPhone:mx-2">
       <div>{session?.user ? <ImageView /> : <LoginMessage />}</div>
     </div>
   );

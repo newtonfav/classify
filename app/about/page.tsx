@@ -8,11 +8,11 @@ export default function Page() {
   return (
     <div className="text-lg items-center">
       <div className="mb-10">
-        <h1 className="text-4xl mb-3 text-accent-400 font-medium">
+        <h1 className="text-4xl mb-3 text-accent-400 font-medium tabletPortrait:text-[2rem]">
           Welcome to Classify🎉
         </h1>
 
-        <div className="space-y-8">
+        <div className="space-y-8 tabletPortrait:text-[1rem]">
           <p>
             Classify is an innovative image recognition software designed to
             streamline and enhance your inventory management process. Our
@@ -24,8 +24,10 @@ export default function Page() {
       </div>
 
       <div className="col-span-3">
-        <h1 className="text-4xl text-accent-400 font-medium">What We Do</h1>
-        <div>
+        <h1 className="text-4xl text-accent-400 font-medium tabletPortrait:text-[2rem]">
+          What We Do
+        </h1>
+        <div className="tabletPortrait:text-[1rem]">
           At Classify, we transform how you handle visual data. Using advanced
           image recognition capabilities powered by the OpenAI Vision API, our
           software provides a seamless way to identify, classify, and manage
