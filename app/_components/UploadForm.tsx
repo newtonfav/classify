@@ -85,7 +85,7 @@ export default function UploadForm({
     <form className="flex flex-col items-center" action={handleFormAction}>
       <div className=" text-black items-center bg-primary-200 py-1 w-7/12 px-1 midPhone:w-10/12">
         {state.responseText ? (
-          <div className="tracking-tight leading-none p-3">
+          <div className="tracking-tight leading-none p-3 midPhone:text-[0.9rem]">
             Do you want to add this item to your Inventory?
           </div>
         ) : (

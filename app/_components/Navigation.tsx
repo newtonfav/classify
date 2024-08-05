@@ -15,9 +15,9 @@ export default async function Navigation() {
       </div>
       <ul
         id="nav-items"
-        className="md:flex gap-16 items-center md:static absolute left-0 bg-white midPhone:text-[1rem] midPhone:text-primary-700 midPhone:-left-[6rem] midPhone:h-[7rem] md:bg-transparent md:w-auto hidden midPhone:p-3"
+        className="md:flex gap-16 transition-all duration-500 items-center md:static absolute left-0 bg-white midPhone:text-[1rem] midPhone:text-primary-700 midPhone:-left-[6rem] midPhone:h-[8rem] md:bg-transparent md:w-auto hidden midPhone:p-3"
       >
-        <li>
+        <li className="midPhone:mb-2">
           <Link
             href="/inventory"
             className="hover:text-accent-400 transition-colors midPhone:mr-6"
@@ -25,7 +25,7 @@ export default async function Navigation() {
             Inventory
           </Link>
         </li>
-        <li>
+        <li className="midPhone:mb-2">
           <Link
             href="/about"
             className="hover:text-accent-400 transition-colors"
@@ -33,9 +33,9 @@ export default async function Navigation() {
             About
           </Link>
         </li>
-        <li>
+        <li className="midPhone:mb-2">
           {session?.user?.image ? (
-            <div className="hover:text-accent-400 transition-colors select-none midPhone:w-max items-center flex gap-3">
+            <div className="hover:text-accent-400 transition-colors select-none midPhone:w-max items-center flex gap-3 midPhone:gap-0 mr-3">
               <Image
                 src={session.user.image}
                 alt={session.user.name as string}

@@ -4,7 +4,7 @@ import logo from "@/public/logo.png";
 
 function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-4 z-10">
+    <Link href="/" className="flex items-center gap-2 z-10 midPhone:w-[2.5rem]">
       <Image
         src={logo}
         quality={100}

@@ -49,7 +49,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-4 phone:text-[0.6rem] ">
+      <div className="mt-4 midPhone:mt-7 phone:text-[0.6rem] ">
         Built with ❤️ by{" "}
         <a
           href="https://newtonfav.xyz"

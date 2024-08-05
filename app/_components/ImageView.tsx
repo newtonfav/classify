@@ -17,7 +17,7 @@ export default function ImageView() {
 
   return (
     <div>
-      <div className="h-[16rem] rounded-[2rem] bg-primary-800 backdrop-blur-[20px] opacity-90 flex items-center justify-center overflow-hidden p-6 relative">
+      <div className="h-[16rem] midPhone:h-[10rem] rounded-[2rem] bg-primary-800 backdrop-blur-[20px] opacity-90 flex items-center justify-center overflow-hidden p-6 relative">
         {isLoading && <Spinner />}
         {imagePath && (
           <Image
@@ -30,7 +30,7 @@ export default function ImageView() {
           />
         )}
         {!isLoading && !imagePath && (
-          <div className="text-[1.3rem] text-wrap text-center text-white">
+          <div className="text-[1.3rem] midPhone:text-[1rem] text-wrap text-center text-white">
             Identify an image using AI🤖, start by uploading an image
           </div>
         )}
@@ -39,8 +39,10 @@ export default function ImageView() {
         <div className="mb-4">
           {aiResponse && (
             <>
-              <div className="mt-2 text-[1rem] text-center">{mainText}</div>
-              <div className="mt-2 text-[1rem] text-center font-bold ">
+              <div className="mt-2 text-[1rem] text-center midPhone:text-[0.8rem]">
+                {mainText}
+              </div>
+              <div className="mt-2 text-[1rem] text-center font-bold midPhone:text-[0.8rem] midPhone:leading-4">
                 This item will be called{" "}
                 <span className="text-primary-300">{name}</span> in your
                 inventory.

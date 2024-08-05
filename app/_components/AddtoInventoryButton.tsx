@@ -44,7 +44,7 @@ export function AddtoInventoryButton({
     <div className="space-x-4 inline-flex">
       <div
         onClick={isloading ? undefined : handleAddItem}
-        className={`bg-accent-600 px-6 select-none py-2 cursor-pointer ${
+        className={`bg-accent-600 px-6 select-none py-2 midPhone:text-[0.8rem] cursor-pointer ${
           isloading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
@@ -52,7 +52,7 @@ export function AddtoInventoryButton({
       </div>
       <div
         onClick={handleNotAddItem}
-        className="bg-primary-900 px-6 py-2 select-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+        className="bg-primary-900 px-6 py-2 midPhone:text-[0.8rem] select-none disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
       >
         No
       </div>
