@@ -29,11 +29,11 @@ export default function Page() {
         </h1>
         <div className="tabletPortrait:text-[1rem]">
           At Classify, we transform how you handle visual data. Using advanced
-          image recognition capabilities powered by the OpenAI Vision API, our
-          software provides a seamless way to identify, classify, and manage
-          images within your inventory. Whether you’re dealing with products,
-          assets, or any other type of visual data, Classify makes it easy to
-          integrate these images into your inventory system.
+          image recognition capabilities powered by Google Gemini, our software
+          provides a seamless way to identify, classify, and manage images
+          within your inventory. Whether you’re dealing with products, assets,
+          or any other type of visual data, Classify makes it easy to integrate
+          these images into your inventory system.
         </div>
 
         <div className="space-y-8">
