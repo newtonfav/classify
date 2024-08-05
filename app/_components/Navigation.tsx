@@ -41,7 +41,7 @@ export default async function Navigation() {
                 alt={session.user.name as string}
                 width={32}
                 height={32}
-                className="h-8 rounded-full"
+                className="h-8 rounded-full mr-2"
                 referrerPolicy="no-referrer"
               />
               <SignOutButton />
