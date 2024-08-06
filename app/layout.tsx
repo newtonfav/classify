@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     default: "Classify",
   },
   description: "Image recognition app that classify items into inventory.",
+  authors: [{ name: "Favour Oghenekowho", url: "https://newtonfav.xyz" }],
 };
 
 export default function RootLayout({
