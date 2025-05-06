@@ -13,8 +13,6 @@ export default function ImageView() {
 
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
 
-  console.log("Image URL:", imageUrl);
-
   const { name, mainText } = extractNameFromPrompt(aiResponse);
 
   return (
