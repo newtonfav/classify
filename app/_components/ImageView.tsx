@@ -11,7 +11,9 @@ export default function ImageView() {
   const [aiResponse, setaiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
+  const imageUrl = imagePath
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${imagePath}`
+    : null;
 
   const { name, mainText } = extractNameFromPrompt(aiResponse);
 
@@ -19,7 +21,7 @@ export default function ImageView() {
     <div>
       <div className="h-[16rem] midPhone:h-[10rem] rounded-[2rem] bg-primary-800 backdrop-blur-[20px] opacity-90 flex items-center justify-center overflow-hidden p-6 relative">
         {isLoading && <Spinner />}
-        {imagePath && (
+        {imageUrl && (
           <Image
             src={imageUrl}
             alt="Image of a shoe"
