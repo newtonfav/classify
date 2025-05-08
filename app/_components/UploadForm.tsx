@@ -9,8 +9,8 @@ import { AddtoInventoryButton } from "./AddtoInventoryButton";
 
 export interface FormState {
   success: boolean;
-  responseText?: string;
-  imagePath?: string;
+  responseText: string;
+  imagePath: string;
   message: string;
 }
 
@@ -108,7 +108,7 @@ export default function UploadForm({
       </span>
 
       <div className="self-center mt-3">
-        {state.responseText ? (
+        {state.responseText && state.imagePath ? (
           <AddtoInventoryButton
             responseText={state.responseText}
             imagePath={state.imagePath}
