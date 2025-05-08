@@ -64,11 +64,15 @@ export async function uploadImage(
   if (!file) throw new Error("No file upload");
 
   if (file?.type !== "image/jpeg" && file?.type !== "image/png") {
-    return { success: false, message: "File must be an image" };
+    return { success: false, message: "File must be an image", imagePath: "" };
   }
 
   if (file?.size > 5000000) {
-    return { success: false, message: "Image must be less than 5mb" };
+    return {
+      success: false,
+      message: "Image must be less than 5mb",
+      imagePath: "",
+    };
   }
   const bytes = await file.arrayBuffer();
 
